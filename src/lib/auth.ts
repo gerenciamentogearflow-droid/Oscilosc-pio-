@@ -50,7 +50,53 @@ export const registerUser = (
 export const getAllUsers = (adminUser: User) => {
   if (adminUser.role !== "admin") return [];
   const users = JSON.parse(localStorage.getItem("motostore_users") || "[]");
-  return users.map((u: any) => ({ username: u.username, role: u.role }));
+  return users.map((u: any) => ({ username: u.username, role: u.role, password: u.password }));
+};
+
+export const deleteUser = (adminUser: User, usernameToDelete: string): boolean => {
+  if (adminUser.role !== "admin") return false;
+  // Impedir que o admin se exclua
+  if (adminUser.username === usernameToDelete) return false;
+
+  const users = JSON.parse(localStorage.getItem("motostore_users") || "[]");
+  const filteredUsers = users.filter((u: any) => u.username !== usernameToDelete);
+  
+  if (filteredUsers.length === users.length) return false;
+  
+  localStorage.setItem("motostore_users", JSON.stringify(filteredUsers));
+  return true;
+};
+
+export const adminUpdateUser = (
+  adminUser: User,
+  targetUsername: string,
+  newUsername: string,
+  newPassword?: string,
+  newRole?: "admin" | "mechanic"
+): boolean => {
+  if (adminUser.role !== "admin") return false;
+
+  const users = JSON.parse(localStorage.getItem("motostore_users") || "[]");
+  const userIndex = users.findIndex((u: any) => u.username === targetUsername);
+  if (userIndex === -1) return false;
+
+  // Se estiver mudando o nome, verifica se o novo já existe
+  if (targetUsername !== newUsername) {
+    if (users.find((u: any) => u.username === newUsername)) {
+      return false;
+    }
+  }
+
+  users[userIndex].username = newUsername;
+  if (newPassword && newPassword.trim() !== "") {
+    users[userIndex].password = newPassword;
+  }
+  if (newRole) {
+    users[userIndex].role = newRole;
+  }
+
+  localStorage.setItem("motostore_users", JSON.stringify(users));
+  return true;
 };
 
 export const updateUserCredentials = (

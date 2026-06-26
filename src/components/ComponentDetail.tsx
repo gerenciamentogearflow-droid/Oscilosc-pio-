@@ -198,6 +198,3 @@ export function ComponentDetail({ component, onBack }: ComponentDetailProps) {
     </div>
   );
 }
-
-// Importing Activity again for tab icon since we used it up there implicitly
-import { Activity } from "lucide-react";
