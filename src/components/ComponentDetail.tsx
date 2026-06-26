@@ -23,12 +23,12 @@ export function ComponentDetail({ component, onBack }: ComponentDetailProps) {
   );
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col">
-      <header className="px-4 pt-12 pb-4 bg-zinc-900 border-b border-zinc-800 sticky top-0 z-10">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900 flex flex-col">
+      <header className="px-4 pt-12 pb-4 bg-white border-b border-zinc-200 z-10 shadow-sm">
         <div className="flex items-center gap-3">
           <button
             onClick={onBack}
-            className="p-2 -ml-2 rounded-full hover:bg-zinc-800 text-zinc-400 transition-colors"
+            className="p-2 -ml-2 rounded-full hover:bg-zinc-100 text-zinc-500 transition-colors"
           >
             <ArrowLeft className="w-6 h-6" />
           </button>
@@ -37,7 +37,7 @@ export function ComponentDetail({ component, onBack }: ComponentDetailProps) {
               {component.name}
             </h1>
             <span
-              className={`text-xs uppercase font-bold tracking-wider ${component.type === "sensor" ? "text-blue-400" : "text-orange-400"}`}
+              className={`text-xs uppercase font-bold tracking-wider ${component.type === "sensor" ? "text-blue-600" : "text-orange-600"}`}
             >
               {component.type === "sensor" ? "Sensor" : "Atuador"}
             </span>
@@ -45,23 +45,23 @@ export function ComponentDetail({ component, onBack }: ComponentDetailProps) {
         </div>
 
         {/* Tabs */}
-        <div className="flex mt-6 bg-zinc-950 p-1.5 rounded-xl border border-zinc-800">
+        <div className="flex mt-6 bg-zinc-50 p-1.5 rounded-xl border border-zinc-200">
           <button
             onClick={() => setActiveTab("overview")}
-            className={`flex-1 flex justify-center items-center gap-2 py-3 text-base font-semibold rounded-lg transition-all ${activeTab === "overview" ? "bg-zinc-800 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-300"}`}
+            className={`flex-1 flex justify-center items-center gap-2 py-3 text-base font-semibold rounded-lg transition-all ${activeTab === "overview" ? "bg-white text-zinc-900 shadow-sm border border-zinc-200" : "text-zinc-500 hover:text-zinc-800"}`}
           >
             <Info className="w-5 h-5" /> Funcionamento
           </button>
           <button
             onClick={() => setActiveTab("oscilloscope")}
-            className={`flex-1 flex justify-center items-center gap-2 py-3 text-base font-semibold rounded-lg transition-all ${activeTab === "oscilloscope" ? "bg-cyan-500/20 text-cyan-400 shadow-sm" : "text-zinc-500 hover:text-zinc-300"}`}
+            className={`flex-1 flex justify-center items-center gap-2 py-3 text-base font-semibold rounded-lg transition-all ${activeTab === "oscilloscope" ? "bg-cyan-50 text-cyan-700 shadow-sm border border-cyan-100" : "text-zinc-500 hover:text-zinc-800"}`}
           >
             <Activity className="w-5 h-5" /> Osciloscópio
           </button>
         </div>
       </header>
 
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1">
         <AnimatePresence mode="wait">
           {activeTab === "overview" && (
             <motion.div
@@ -73,21 +73,21 @@ export function ComponentDetail({ component, onBack }: ComponentDetailProps) {
               className="p-5 space-y-6 pb-12"
             >
               <section>
-                <h3 className="flex items-center gap-2 text-base font-semibold text-zinc-400 mb-3">
+                <h3 className="flex items-center gap-2 text-base font-semibold text-zinc-500 mb-3">
                   <Info className="w-5 h-5" /> Descrição Técnica
                 </h3>
-                <p className="text-zinc-300 text-base leading-relaxed whitespace-pre-wrap">
+                <p className="text-zinc-700 text-base leading-relaxed whitespace-pre-wrap">
                   {component.fullDescription}
                 </p>
               </section>
 
               {component.connectionInstructions && (
-                <section className="bg-cyan-500/10 border border-cyan-500/20 rounded-2xl p-5">
-                  <h3 className="flex items-center gap-2 text-base font-bold text-cyan-400 mb-3">
+                <section className="bg-cyan-50 border border-cyan-200 rounded-2xl p-5">
+                  <h3 className="flex items-center gap-2 text-base font-bold text-cyan-700 mb-3">
                     <Cable className="w-5 h-5" /> Como Conectar as Pontas de
                     Prova
                   </h3>
-                  <p className="text-cyan-100/90 text-base leading-relaxed whitespace-pre-wrap">
+                  <p className="text-cyan-900 text-base leading-relaxed whitespace-pre-wrap">
                     {component.connectionInstructions}
                   </p>
                 </section>
@@ -106,43 +106,43 @@ export function ComponentDetail({ component, onBack }: ComponentDetailProps) {
             >
               <OscilloscopeDisplay component={component} />
 
-              <section className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-sm">
-                <div className="bg-zinc-800 px-5 py-4 flex items-center gap-3 border-b border-zinc-700">
-                  <Settings2 className="w-6 h-6 text-cyan-400" />
-                  <h3 className="font-bold text-white text-lg">
+              <section className="bg-white border border-zinc-200 rounded-2xl overflow-hidden shadow-sm">
+                <div className="bg-zinc-50 px-5 py-4 flex items-center gap-3 border-b border-zinc-200">
+                  <Settings2 className="w-6 h-6 text-cyan-600" />
+                  <h3 className="font-bold text-zinc-900 text-lg">
                     Configuração (Setup)
                   </h3>
                 </div>
                 <div className="p-5 grid grid-cols-2 gap-y-6 gap-x-4 text-base">
                   <div>
-                    <span className="block text-sm text-zinc-400 mb-1 font-medium">
+                    <span className="block text-sm text-zinc-500 mb-1 font-medium">
                       Tempo / Div
                     </span>
-                    <span className="font-mono font-bold text-zinc-100">
+                    <span className="font-mono font-bold text-zinc-900">
                       {component.oscilloscopeSetup.timeDiv}
                     </span>
                   </div>
                   <div>
-                    <span className="block text-sm text-zinc-400 mb-1 font-medium">
+                    <span className="block text-sm text-zinc-500 mb-1 font-medium">
                       Tensão / Div
                     </span>
-                    <span className="font-mono font-bold text-zinc-100">
+                    <span className="font-mono font-bold text-zinc-900">
                       {component.oscilloscopeSetup.voltageDiv}
                     </span>
                   </div>
                   <div>
-                    <span className="block text-sm text-zinc-400 mb-1 font-medium">
+                    <span className="block text-sm text-zinc-500 mb-1 font-medium">
                       Trigger (Borda)
                     </span>
-                    <span className="font-mono font-bold text-zinc-100">
+                    <span className="font-mono font-bold text-zinc-900">
                       {component.oscilloscopeSetup.triggerEdge}
                     </span>
                   </div>
                   <div>
-                    <span className="block text-sm text-zinc-400 mb-1 font-medium">
+                    <span className="block text-sm text-zinc-500 mb-1 font-medium">
                       Modo & Nível
                     </span>
-                    <span className="font-mono font-bold text-zinc-100">
+                    <span className="font-mono font-bold text-zinc-900">
                       {component.oscilloscopeSetup.triggerMode} @{" "}
                       {component.oscilloscopeSetup.triggerLevel}
                     </span>
@@ -151,7 +151,7 @@ export function ComponentDetail({ component, onBack }: ComponentDetailProps) {
               </section>
 
               <section>
-                <h3 className="flex items-center gap-2 text-base font-bold text-cyan-400 mb-5 px-1">
+                <h3 className="flex items-center gap-2 text-base font-bold text-cyan-600 mb-5 px-1">
                   <Zap className="w-5 h-5" /> Análise do Sinal (Por Fases)
                 </h3>
 
@@ -160,16 +160,16 @@ export function ComponentDetail({ component, onBack }: ComponentDetailProps) {
                     {component.waveformPhases.map((phase) => (
                       <div
                         key={phase.id}
-                        className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 flex gap-4 items-start shadow-sm"
+                        className="bg-white border border-zinc-200 rounded-2xl p-5 flex gap-4 items-start shadow-sm"
                       >
-                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-cyan-500/10 border-2 border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-lg">
+                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-cyan-50 border-2 border-cyan-100 flex items-center justify-center text-cyan-600 font-bold text-lg">
                           {phase.id}
                         </div>
                         <div>
-                          <h4 className="text-zinc-100 font-bold mb-2 text-lg">
+                          <h4 className="text-zinc-900 font-bold mb-2 text-lg">
                             {phase.title}
                           </h4>
-                          <p className="text-zinc-400 text-base leading-relaxed">
+                          <p className="text-zinc-600 text-base leading-relaxed">
                             {phase.description}
                           </p>
                         </div>
@@ -177,15 +177,15 @@ export function ComponentDetail({ component, onBack }: ComponentDetailProps) {
                     ))}
 
                     {/* Fallback to explanation if there is additional text we want to keep */}
-                    <div className="mt-6 bg-zinc-950/50 border border-zinc-800/50 rounded-2xl p-5">
-                      <p className="text-zinc-500 text-sm leading-relaxed italic">
+                    <div className="mt-6 bg-zinc-50 border border-zinc-200 rounded-2xl p-5">
+                      <p className="text-zinc-600 text-sm leading-relaxed italic">
                         {component.waveformExplanation}
                       </p>
                     </div>
                   </div>
                 ) : (
-                  <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
-                    <p className="text-zinc-300 text-base leading-relaxed whitespace-pre-line">
+                  <div className="bg-white border border-zinc-200 rounded-2xl p-5 shadow-sm">
+                    <p className="text-zinc-700 text-base leading-relaxed whitespace-pre-line">
                       {component.waveformExplanation}
                     </p>
                   </div>

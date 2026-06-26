@@ -16,7 +16,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "2V a 5V",
     },
     connectionInstructions:
-      "Conecte a garra jacaré preta no negativo da bateria ou em um bom ponto de aterramento do motor. Com a ponta de prova (canal 1), espete o fio de sinal do sensor CKP. Geralmente o sensor possui dois fios (sinal e referência negativa), meça nos dois se não souber qual é o de sinal.",
+      "⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA e o motor girando (partida). Conecte a garra jacaré preta no negativo da bateria ou em um bom ponto de aterramento do motor. Com a ponta de prova (canal 1), espete o fio de sinal do sensor CKP. Geralmente o sensor possui dois fios (sinal e referência negativa), meça nos dois se não souber qual é o de sinal.",
     waveformExplanation:
       "O sinal do sensor indutivo reflete a imagem física da roda fônica. É uma Corrente Alternada (CA) cuja amplitude e frequência aumentam com o giro do motor. Anomalias como ondas tortas, picos menores isolados ou assimetria grave indicam roda fônica empenada, dentes quebrados ou excesso de limalha no sensor magnético.",
     waveformPhases: [
@@ -78,7 +78,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "2.5V",
     },
     connectionInstructions:
-      "Aterre a garra preta do osciloscópio no negativo da bateria. Identifique os fios do sensor (Alimentação 5V/12V, Terra e Sinal). Espete a ponta de prova do canal 1 no fio de Sinal. Você pode confirmar a alimentação espetando no fio positivo (deve ser uma linha reta de 5V ou 12V).",
+      "⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA para alimentar o sensor. Aterre a garra preta do osciloscópio no negativo da bateria. Identifique os fios do sensor (Alimentação 5V/12V, Terra e Sinal). Espete a ponta de prova do canal 1 no fio de Sinal. Você pode confirmar a alimentação espetando no fio positivo (deve ser uma linha reta de 5V ou 12V).",
     waveformExplanation:
       "Diferente do indutivo, o sensor de Efeito Hall processa o sinal internamente e envia uma onda quadrada digital limpa para a ECU. A amplitude não muda com a rotação (sempre 5V ou 12V). Defeitos críticos a observar: base do sinal não chegando a 0V perfeito (falha de aterramento) ou bordas de subida/descida arredondadas (resistência/capacitância excessiva no chicote).",
     waveformPhases: [
@@ -140,7 +140,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "10V",
     },
     connectionInstructions:
-      "Conecte a garra preta no negativo da bateria. No bico injetor há dois fios: um recebe alimentação constante (12V) e o outro é o pulso negativo controlado pela ECU. Espete a ponta de prova (canal 1) no fio de pulso negativo.",
+      "⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA e o motor funcionando (ou dando partida). Conecte a garra preta no negativo da bateria. No bico injetor há dois fios: um recebe alimentação constante (12V) e o outro é o pulso negativo controlado pela ECU. Espete a ponta de prova (canal 1) no fio de pulso negativo.",
     waveformExplanation:
       "O sinal do injetor é rico em detalhes eletromecânicos. O pulso de 0V dita o tempo que a válvula fica aberta. O pico indutivo demonstra a saúde elétrica da bobina interna. A corcova (Pintle Bump) na descida do sinal é a assinatura mecânica fundamental: ela comprova fisicamente que a agulha da válvula retornou à sede impulsionada pela mola.",
     waveformPhases: [
@@ -212,7 +212,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "10V",
     },
     connectionInstructions:
-      "Use um atenuador 20:1 ou a pinça capacitiva para evitar queimar seu osciloscópio, pois o pico indutivo pode passar de 400V. Conecte a garra preta no negativo. Espete a ponta de prova (com atenuador) no fio de controle (pulso negativo da ECU) no conector primário da bobina.",
+      "⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA e o motor funcionando. Use um atenuador 20:1 ou a pinça capacitiva para evitar queimar seu osciloscópio, pois o pico indutivo pode passar de 400V. Conecte a garra preta no negativo. Espete a ponta de prova (com atenuador) no fio de controle (pulso negativo da ECU) no conector primário da bobina.",
     waveformExplanation:
       "A análise do primário da bobina de ignição é a janela principal para a saúde de todo o sistema de ignição (velas, cabos, misturas). O tempo de queima e a tensão sustentada durante a faísca indicam o quão limpa foi a combustão. Falta de oscilações residuais denotam curto-circuito interno na bobina.",
     waveformPhases: [
@@ -284,7 +284,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "1V",
     },
     connectionInstructions:
-      "Aterre a garra preta no negativo da bateria. O TPS possui três fios (5V, Terra e Sinal). Com a ignição ligada (motor desligado), espete a ponta de prova no fio de sinal. Gire o acelerador lentamente e observe a rampa de tensão subindo no osciloscópio.",
+      "⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA (motor não precisa estar funcionando). Aterre a garra preta no negativo da bateria. O TPS possui três fios (5V, Terra e Sinal). Espete a ponta de prova no fio de sinal. Gire o acelerador lentamente e observe a rampa de tensão subindo no osciloscópio.",
     waveformExplanation:
       'Ao acelerar devagar, o sinal deve subir formando uma rampa contínua e lisa, saindo de ~0.5V e indo até ~4.5V. Quedas abruptas a zero no meio da rampa indicam trilha do sensor rompida ou gasta (causa "buracos" na aceleração).',
     waveformPhases: [
@@ -333,7 +333,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "400mV",
     },
     connectionInstructions:
-      "Conecte a garra preta no negativo da bateria (ou no fio terra do sensor, se preferir isolar o chicote). Identifique o fio de Sinal da sonda lambda (normalmente o fio preto, em sondas de 4 fios, ou o único fio solto nas antigas). Espete a ponta de prova com o motor quente e funcionando.",
+      "⚠️ IMPORTANTE: O motor deve estar FUNCIONANDO e AQUECIDO para a sonda gerar sinal. Conecte a garra preta no negativo da bateria (ou no fio terra do sensor, se preferir isolar o chicote). Identifique o fio de Sinal da sonda lambda (normalmente o fio preto, em sondas de 4 fios, ou o único fio solto nas antigas). Espete a ponta de prova.",
     waveformExplanation:
       "Com a moto quente e em marcha lenta/aceleração constante, a onda deve ciclar de forma suave e rápida entre 100mV (0.1V) e 800mV-900mV (0.9V). Ondas muito lentas ou travadas indicam sonda contaminada ou defeituosa.",
     waveformPhases: [
@@ -368,6 +368,55 @@ export const componentsDB: ComponentData[] = [
     waveType: "lambda",
   },
   {
+    id: "lambda-heater",
+    name: "Aquecedor da Sonda Lambda (O2)",
+    type: "actuator",
+    shortDescription: "Resistor interno para aquecimento rápido da sonda.",
+    fullDescription:
+      "As sondas lambda possuem um resistor de aquecimento interno. A ECU controla esse aquecedor usando PWM (modulação por largura de pulso) ou tensão contínua. Isso faz com que a sonda atinja a temperatura de trabalho rapidamente para reduzir as emissões com o motor frio.",
+    oscilloscopeSetup: {
+      timeDiv: "50ms a 100ms",
+      voltageDiv: "5V a 10V",
+      triggerEdge: "Descida",
+      triggerMode: "Auto",
+      triggerLevel: "5V",
+    },
+    connectionInstructions:
+      "⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA e o motor em funcionamento (geralmente fase fria). Aterre a garra preta do osciloscópio no negativo da bateria ou chassi. Identifique os dois fios do aquecedor da Sonda (geralmente de mesma cor, como branco ou preto). Um recebe 12V da bateria/relé, e o outro é aterrado pela ECU em pulsos (PWM). Espete a ponta de prova (Canal 1) neste fio de pulso negativo.",
+    waveformExplanation:
+      "O sinal é uma onda quadrada PWM. A ECU varia o tempo que o sinal fica em 0V (tempo de ativação) para controlar a temperatura do aquecedor. A linha deve subir até a tensão da bateria (~12V a 14V) quando o circuito está aberto (ECU não aterra). Defeitos comuns: fio partido, aquecedor queimado (resistência infinita) ou ECU não chaveando.",
+    waveformPhases: [
+      {
+        id: 1,
+        title: "Tensão de Alimentação",
+        description: "Circuito aberto. Tensão de bateria (12V-14V) aguardando o chaveamento pela ECU.",
+        x: 5,
+        y: 20,
+        labelX: 5,
+        labelY: 35,
+      },
+      {
+        id: 2,
+        title: "Ativação (Tempo de Aterramento)",
+        description: "A ECU aterra o circuito (0V). A corrente flui pelo resistor aquecendo a sonda.",
+        x: 22,
+        y: 80,
+        labelX: 22,
+        labelY: 65,
+      },
+      {
+        id: 3,
+        title: "Desativação",
+        description: "A ECU corta o terra e o sinal volta para a tensão da bateria.",
+        x: 47,
+        y: 20,
+        labelX: 47,
+        labelY: 35,
+      },
+    ],
+    waveType: "pwm",
+  },
+  {
     id: "map",
     name: "Sensor MAP",
     type: "sensor",
@@ -382,7 +431,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "2.5V",
     },
     connectionInstructions:
-      "Aterre a garra preta no negativo da bateria. O MAP possui três fios (Alimentação 5V, Terra e Sinal). Espete a ponta de prova no fio de Sinal. Ligue a moto e observe a variação de tensão ao acelerar subitamente o motor.",
+      "⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA e o motor funcionando para gerar vácuo. Aterre a garra preta no negativo da bateria. O MAP possui três fios (Alimentação 5V, Terra e Sinal). Espete a ponta de prova no fio de Sinal. Observe a variação de tensão ao acelerar subitamente o motor.",
     waveformExplanation:
       "Em marcha lenta, o sinal fica baixo (alto vácuo, ex: 1.5V). Ao dar uma aceleração rápida (Snap Throttle), a pressão sobe (vácuo cai), e o sinal dá um pico até próximo de 4V. Também é possível ver oscilações correspondentes à sucção dos cilindros em marcha lenta.",
     waveformPhases: [
@@ -426,5 +475,103 @@ export const componentsDB: ComponentData[] = [
       },
     ],
     waveType: "map",
+  },
+  {
+    id: "abs-indutivo",
+    name: "Sensor ABS - Indutivo",
+    type: "sensor",
+    shortDescription: "Mede a velocidade da roda usando roda fônica.",
+    fullDescription:
+      "O sensor ABS indutivo é semelhante ao CKP indutivo. Ele gera uma Corrente Alternada (CA) cuja frequência e amplitude aumentam conforme a roda gira mais rápido. Se comunica com o módulo do ABS para evitar o travamento das rodas.",
+    oscilloscopeSetup: {
+      timeDiv: "20ms a 50ms",
+      voltageDiv: "1V a 5V",
+      triggerEdge: "Subida ou Descida",
+      triggerMode: "Normal",
+      triggerLevel: "1V",
+    },
+    connectionInstructions:
+      "TESTE NA MOTO: ⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA. Conecte a garra jacaré preta no negativo da bateria ou em um bom ponto de aterramento. Espete o fio de sinal do sensor ABS (geralmente na roda dianteira ou traseira). Meça com a roda girando.\n\nTESTE EM BANCADA (Roda Girando ou Furadeira):\n1. Pode testar o sensor no lugar, levantando a roda e girando-a com a mão para gerar o sinal.\n2. Para testar fora, prenda uma roda fônica ou dente metálico em uma furadeira e gire próximo à ponta do sensor para simular a roda girando.",
+    waveformExplanation:
+      "O sinal é uma onda senoidal de Corrente Alternada (CA). Ao contrário do CKP, normalmente a roda fônica do ABS não possui falha de dentes (gap), produzindo uma senoide contínua. Defeitos comuns: sinal muito baixo (distância do sensor aumentada), onda irregular (roda fônica amassada ou suja).",
+    waveformPhases: [
+      {
+        id: 1,
+        title: "Aproximação do Dente (+)",
+        description: "O dente da roda fônica do ABS se aproxima do núcleo magnético, induzindo tensão positiva.",
+        x: 20,
+        y: 35,
+        labelX: 20,
+        labelY: 10,
+      },
+      {
+        id: 2,
+        title: "Cruzamento Zero (0V)",
+        description: "Centro do dente alinhado com o sensor.",
+        x: 24,
+        y: 50,
+        labelX: 10,
+        labelY: 50,
+      },
+      {
+        id: 3,
+        title: "Afastamento do Dente (-)",
+        description: "Dente se afasta, inverte a polaridade da tensão.",
+        x: 28,
+        y: 65,
+        labelX: 28,
+        labelY: 90,
+      },
+    ],
+    waveType: "sine",
+  },
+  {
+    id: "abs-hall",
+    name: "Sensor ABS - Ativo (Hall)",
+    type: "sensor",
+    shortDescription: "Sensor ABS digital, gera onda quadrada.",
+    fullDescription:
+      "O sensor ABS ativo utiliza elemento Hall ou Magnetoresistivo para ler uma roda fônica ou um anel magnético no rolamento. Ele gera um sinal digital de onda quadrada limpa, mesmo em baixíssimas velocidades. É muito superior ao indutivo em precisão.",
+    oscilloscopeSetup: {
+      timeDiv: "20ms a 50ms",
+      voltageDiv: "2V",
+      triggerEdge: "Subida",
+      triggerMode: "Normal",
+      triggerLevel: "2.5V",
+    },
+    connectionInstructions:
+      "TESTE NA MOTO: ⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA para o módulo alimentar o sensor. Aterre a garra preta do osciloscópio no negativo da bateria. Identifique os fios do sensor ABS. Espete a ponta de prova do canal 1 no fio de Sinal.\n\nTESTE EM BANCADA (Roda Girando ou Furadeira):\n1. Levante a roda e gire-a com a mão. O módulo ABS deve estar ligado para alimentar o sensor.\n2. Para testar fora, alimente o sensor com a tensão correta (geralmente 12V). Gire uma roda fônica ou ímã multipolar (anexo a uma furadeira) próximo ao sensor para ver a onda quadrada.",
+    waveformExplanation:
+      "Gera uma onda quadrada perfeita. O sinal não altera de amplitude com a variação da velocidade, apenas altera a frequência (mais rápido = onda mais espremida). Defeitos: Base da onda não chega em 0V, topos arredondados, falha na amplitude (defeito no sensor ou módulo).",
+    waveformPhases: [
+      {
+        id: 1,
+        title: "Nível Lógico Baixo (0V)",
+        description: "Sensor chaveando para o terra.",
+        x: 20,
+        y: 80,
+        labelX: 20,
+        labelY: 95,
+      },
+      {
+        id: 2,
+        title: "Borda de Subida",
+        description: "Transição digital ultra rápida informando a passagem do polo/dente.",
+        x: 25,
+        y: 50,
+        labelX: 10,
+        labelY: 50,
+      },
+      {
+        id: 3,
+        title: "Nível Lógico Alto",
+        description: "Tensão de referência proveniente do módulo ABS.",
+        x: 32,
+        y: 20,
+        labelX: 32,
+        labelY: 10,
+      },
+    ],
+    waveType: "square",
   },
 ];

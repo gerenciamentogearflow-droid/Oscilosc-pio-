@@ -55,7 +55,7 @@ export default function App() {
   }
 
   if (view === "admin" && user) {
-    return <AdminPanel adminUser={user} onBack={() => setView("dashboard")} />;
+    return <AdminPanel adminUser={user} onBack={() => setView("dashboard")} onUserUpdate={(updatedUser) => setUser(updatedUser)} />;
   }
 
   if (view === "detail" && selectedComponent) {

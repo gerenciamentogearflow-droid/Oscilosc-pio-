@@ -1,22 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { User } from "../types";
-import { registerUser, getAllUsers } from "../lib/auth";
-import { ArrowLeft, UserPlus, Users, ShieldAlert } from "lucide-react";
+import { registerUser, getAllUsers, updateUserCredentials } from "../lib/auth";
+import { ArrowLeft, UserPlus, Users, Settings, KeyRound } from "lucide-react";
 import { motion } from "motion/react";
 
 interface AdminPanelProps {
   adminUser: User;
   onBack: () => void;
+  onUserUpdate: (updatedUser: User) => void;
 }
 
-export function AdminPanel({ adminUser, onBack }: AdminPanelProps) {
+export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps) {
   const [users, setUsers] = useState<any[]>([]);
+  
+  // Registration state
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [statusMsg, setStatusMsg] = useState({ text: "", type: "" });
 
+  // Profile edit state
+  const [editUsername, setEditUsername] = useState(adminUser.username);
+  const [editPassword, setEditPassword] = useState("");
+  const [profileMsg, setProfileMsg] = useState({ text: "", type: "" });
+
   useEffect(() => {
-    setUsers(getAllUsers(adminUser));
+    if (adminUser.role === "admin") {
+      setUsers(getAllUsers(adminUser));
+    }
   }, [adminUser]);
 
   const handleRegister = (e: React.FormEvent) => {
@@ -42,124 +52,193 @@ export function AdminPanel({ adminUser, onBack }: AdminPanelProps) {
     setTimeout(() => setStatusMsg({ text: "", type: "" }), 4000);
   };
 
-  if (adminUser.role !== "admin") {
-    return (
-      <div className="min-h-screen p-6 bg-zinc-950 flex flex-col items-center justify-center text-center">
-        <ShieldAlert className="w-16 h-16 text-red-500 mb-4" />
-        <h2 className="text-xl font-bold text-white mb-2">Acesso Negado</h2>
-        <p className="text-zinc-400 mb-6">
-          Apenas administradores (Mafran) podem acessar esta tela.
-        </p>
-        <button
-          onClick={onBack}
-          className="bg-zinc-800 text-white px-6 py-3 rounded-lg font-medium"
-        >
-          Voltar
-        </button>
-      </div>
-    );
+  const handleProfileUpdate = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editUsername) return;
+
+    const updated = updateUserCredentials(adminUser, editUsername, editPassword);
+    if (updated) {
+      setProfileMsg({
+        text: "Dados atualizados com sucesso!",
+        type: "success",
+      });
+      setEditPassword("");
+      onUserUpdate(updated);
+      if (adminUser.role === "admin") {
+         setUsers(getAllUsers(updated));
+      }
+    } else {
+      setProfileMsg({
+        text: "Erro ao atualizar. Nome já em uso?",
+        type: "error",
+      });
+    }
+    setTimeout(() => setProfileMsg({ text: "", type: "" }), 4000);
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col">
-      <header className="px-4 pt-12 pb-4 bg-zinc-900 border-b border-zinc-800 sticky top-0 z-10">
+    <div className="min-h-screen bg-zinc-50 text-zinc-900 flex flex-col">
+      <header className="px-4 pt-12 pb-4 bg-white border-b border-zinc-200 z-10 shadow-sm">
         <div className="flex items-center gap-3">
           <button
             onClick={onBack}
-            className="p-2 -ml-2 rounded-full hover:bg-zinc-800 text-zinc-400 transition-colors"
+            className="p-2 -ml-2 rounded-full hover:bg-zinc-100 text-zinc-500 transition-colors"
           >
             <ArrowLeft className="w-6 h-6" />
           </button>
           <div>
-            <h1 className="text-xl font-bold tracking-tight">Painel Admin</h1>
-            <p className="text-xs text-zinc-400">Gerenciamento de acessos</p>
+            <h1 className="text-xl font-bold tracking-tight">Configurações</h1>
+            <p className="text-xs text-zinc-500">Perfil e conta</p>
           </div>
         </div>
       </header>
 
-      <main className="flex-1 p-4 space-y-6 overflow-y-auto">
+      <main className="flex-1 p-4 space-y-6">
+        
+        {/* PROFILE EDIT SECTION */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 shadow-lg"
+          className="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm"
         >
-          <div className="flex items-center gap-2 mb-4 text-emerald-500">
-            <UserPlus className="w-5 h-5" />
-            <h2 className="font-semibold text-white">
-              Cadastrar Novo Mecânico
+          <div className="flex items-center gap-2 mb-4 text-cyan-600">
+            <Settings className="w-5 h-5" />
+            <h2 className="font-semibold text-zinc-900">
+              Minha Conta
             </h2>
           </div>
 
-          <form onSubmit={handleRegister} className="space-y-4">
+          <form onSubmit={handleProfileUpdate} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-zinc-400 mb-1">
-                Nome de Usuário
+              <label className="block text-xs font-medium text-zinc-500 mb-1">
+                Nome de Login
               </label>
               <input
                 type="text"
-                value={newUsername}
-                onChange={(e) => setNewUsername(e.target.value)}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2 text-zinc-100 focus:outline-none focus:border-emerald-500"
+                value={editUsername}
+                onChange={(e) => setEditUsername(e.target.value)}
+                className="w-full bg-white border border-zinc-300 rounded-lg px-3 py-2 text-zinc-900 focus:outline-none focus:border-cyan-500 shadow-sm"
                 required
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-zinc-400 mb-1">
-                Senha
+              <label className="block text-xs font-medium text-zinc-500 mb-1">
+                Nova Senha
               </label>
               <input
                 type="password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2 text-zinc-100 focus:outline-none focus:border-emerald-500"
-                required
+                value={editPassword}
+                onChange={(e) => setEditPassword(e.target.value)}
+                placeholder="Deixe em branco para manter a atual"
+                className="w-full bg-white border border-zinc-300 rounded-lg px-3 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-cyan-500 shadow-sm"
               />
             </div>
 
-            {statusMsg.text && (
+            {profileMsg.text && (
               <p
-                className={`text-sm font-medium ${statusMsg.type === "success" ? "text-emerald-400" : "text-red-400"}`}
+                className={`text-sm font-medium ${profileMsg.type === "success" ? "text-cyan-600" : "text-red-600"}`}
               >
-                {statusMsg.text}
+                {profileMsg.text}
               </p>
             )}
 
             <button
               type="submit"
-              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2.5 rounded-lg transition-colors"
+              className="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-2.5 rounded-lg transition-colors flex justify-center items-center gap-2"
             >
-              Criar Conta
+              <KeyRound className="w-4 h-4" /> Salvar Alterações
             </button>
           </form>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 shadow-lg"
-        >
-          <div className="flex items-center gap-2 mb-4 text-blue-400">
-            <Users className="w-5 h-5" />
-            <h2 className="font-semibold text-white">Usuários Cadastrados</h2>
-          </div>
-
-          <div className="space-y-2">
-            {users.map((u, i) => (
-              <div
-                key={i}
-                className="flex justify-between items-center p-3 bg-zinc-950 rounded-lg border border-zinc-800"
-              >
-                <span className="font-medium text-zinc-200">{u.username}</span>
-                <span
-                  className={`text-xs px-2 py-1 rounded-full font-medium ${u.role === "admin" ? "bg-blue-500/20 text-blue-400" : "bg-emerald-500/20 text-emerald-400"}`}
-                >
-                  {u.role.toUpperCase()}
-                </span>
+        {/* ADMIN SECTION */}
+        {adminUser.role === "admin" && (
+          <>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm"
+            >
+              <div className="flex items-center gap-2 mb-4 text-emerald-600">
+                <UserPlus className="w-5 h-5" />
+                <h2 className="font-semibold text-zinc-900">
+                  Cadastrar Novo Mecânico
+                </h2>
               </div>
-            ))}
-          </div>
-        </motion.div>
+
+              <form onSubmit={handleRegister} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-medium text-zinc-500 mb-1">
+                    Nome de Usuário
+                  </label>
+                  <input
+                    type="text"
+                    value={newUsername}
+                    onChange={(e) => setNewUsername(e.target.value)}
+                    className="w-full bg-white border border-zinc-300 rounded-lg px-3 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-500 shadow-sm"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-zinc-500 mb-1">
+                    Senha
+                  </label>
+                  <input
+                    type="password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    className="w-full bg-white border border-zinc-300 rounded-lg px-3 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-500 shadow-sm"
+                    required
+                  />
+                </div>
+
+                {statusMsg.text && (
+                  <p
+                    className={`text-sm font-medium ${statusMsg.type === "success" ? "text-emerald-600" : "text-red-600"}`}
+                  >
+                    {statusMsg.text}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 rounded-lg transition-colors"
+                >
+                  Criar Conta
+                </button>
+              </form>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm"
+            >
+              <div className="flex items-center gap-2 mb-4 text-blue-600">
+                <Users className="w-5 h-5" />
+                <h2 className="font-semibold text-zinc-900">Usuários Cadastrados</h2>
+              </div>
+
+              <div className="space-y-2">
+                {users.map((u, i) => (
+                  <div
+                    key={i}
+                    className="flex justify-between items-center p-3 bg-zinc-50 rounded-lg border border-zinc-200"
+                  >
+                    <span className="font-medium text-zinc-900">{u.username}</span>
+                    <span
+                      className={`text-xs px-2 py-1 rounded-full font-medium ${u.role === "admin" ? "bg-blue-100 text-blue-700" : "bg-emerald-100 text-emerald-700"}`}
+                    >
+                      {u.role.toUpperCase()}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </>
+        )}
       </main>
     </div>
   );

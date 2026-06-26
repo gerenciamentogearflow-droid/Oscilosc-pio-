@@ -52,3 +52,34 @@ export const getAllUsers = (adminUser: User) => {
   const users = JSON.parse(localStorage.getItem("motostore_users") || "[]");
   return users.map((u: any) => ({ username: u.username, role: u.role }));
 };
+
+export const updateUserCredentials = (
+  currentUser: User,
+  newUsername: string,
+  newPassword: string,
+): User | null => {
+  const users = JSON.parse(localStorage.getItem("motostore_users") || "[]");
+  
+  const userIndex = users.findIndex((u: any) => u.username === currentUser.username);
+  
+  if (userIndex === -1) return null;
+
+  // Se for mudar o nome, precisa verificar se o novo nome já existe
+  if (currentUser.username !== newUsername) {
+    if (users.find((u: any) => u.username === newUsername)) {
+       return null; // Usuário já existe
+    }
+  }
+
+  users[userIndex].username = newUsername;
+  
+  // Se informou nova senha, altera
+  if (newPassword.trim() !== "") {
+    users[userIndex].password = newPassword;
+  }
+
+  localStorage.setItem("motostore_users", JSON.stringify(users));
+  
+  return { username: newUsername, role: users[userIndex].role };
+};
+

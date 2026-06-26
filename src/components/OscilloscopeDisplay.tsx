@@ -10,9 +10,15 @@ export function OscilloscopeDisplay({ component }: OscilloscopeDisplayProps) {
   // Generate SVG path based on wave type
   const getPath = () => {
     switch (component.waveType) {
+      case "sine":
+        // Pure continuous sine wave
+        return "M 0 50 C 2 20 6 20 8 50 C 10 80 14 80 16 50 C 18 20 22 20 24 50 C 26 80 30 80 32 50 C 34 20 38 20 40 50 C 42 80 46 80 48 50 C 50 20 54 20 56 50 C 58 80 62 80 64 50 C 66 20 70 20 72 50 C 74 80 78 80 80 50 C 82 20 86 20 88 50 C 90 80 94 80 96 50 C 98 20 100 20 102 50";
       case "sine-gap":
         // Inductive CKP - organic AC wave, amplitude & freq increase, clear gap
         return "M 0 50 C 2 20 6 20 8 50 C 10 80 14 80 16 50 C 18 20 22 20 24 50 C 26 80 30 80 32 50 C 34 20 38 20 40 50 C 42 80 46 80 48 50 C 52 0 65 0 70 50 C 72 80 76 80 78 50 C 80 20 84 20 86 50 C 88 80 92 80 94 50 C 96 20 100 20 102 50";
+      case "square":
+        // Pure continuous square wave
+        return "M 0 80 L 10 80 L 11 20 L 25 20 L 26 80 L 40 80 L 41 20 L 55 20 L 56 80 L 70 80 L 71 20 L 85 20 L 86 80 L 100 80";
       case "square-gap":
         // Digital Hall effect - slight tilt on rising/falling edges for realism
         return "M 0 80 L 10 80 L 11 20 L 20 20 L 21 80 L 30 80 L 31 20 L 40 20 L 41 80 L 65 80 L 66 20 L 75 20 L 76 80 L 85 80 L 86 20 L 95 20 L 96 80 L 100 80";
@@ -31,6 +37,9 @@ export function OscilloscopeDisplay({ component }: OscilloscopeDisplayProps) {
       case "map":
         // MAP: Idle ripple -> Snap Throttle Drop -> WOT spike -> Decel vacuum
         return "M 0 70 Q 2 68 4 70 T 8 70 T 12 70 T 16 70 L 20 70 L 23 45 L 26 55 L 40 40 L 65 40 L 70 85 Q 75 85 80 80 Q 85 75 90 70 T 100 70";
+      case "pwm":
+        // PWM for Heater: 12V (20) -> 0V (80)
+        return "M 0 20 L 10 20 L 10 80 L 35 80 L 35 20 L 60 20 L 60 80 L 85 80 L 85 20 L 100 20";
       default:
         return "M 0 50 L 100 50";
     }
@@ -112,9 +121,6 @@ export function OscilloscopeDisplay({ component }: OscilloscopeDisplayProps) {
                     strokeDasharray="1,1"
                     className="opacity-70"
                   />
-
-                  {/* Target point on wave */}
-                  <circle cx={phase.x} cy={phase.y} r="0.8" fill="#FFFFFF" />
 
                   {/* Label Badge */}
                   <circle
