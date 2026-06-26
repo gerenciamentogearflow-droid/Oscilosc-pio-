@@ -1,4 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" fill="#0891b2" rx="100"/>
-  <path d="M128 256 L224 352 L384 160" fill="none" stroke="#ffffff" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect width="512" height="512" fill="#0f172a" />
+  <g stroke="#1e293b" stroke-width="8">
+    <line x1="0" y1="128" x2="512" y2="128" />
+    <line x1="0" y1="256" x2="512" y2="256" />
+    <line x1="0" y1="384" x2="512" y2="384" />
+    <line x1="128" y1="0" x2="128" y2="512" />
+    <line x1="256" y1="0" x2="256" y2="512" />
+    <line x1="384" y1="0" x2="384" y2="512" />
+  </g>
+  <path d="M -128 256 C -64 64, 64 64, 128 256 C 192 448, 320 448, 384 256 C 448 64, 576 64, 640 256" fill="none" stroke="#22d3ee" stroke-width="72" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+  <path d="M -128 256 C -64 64, 64 64, 128 256 C 192 448, 320 448, 384 256 C 448 64, 576 64, 640 256" fill="none" stroke="#22d3ee" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
