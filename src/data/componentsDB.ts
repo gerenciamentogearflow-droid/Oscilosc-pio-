@@ -16,7 +16,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "2V a 5V",
     },
     connectionInstructions:
-      "⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA e o motor girando (partida). Conecte a garra jacaré preta no negativo da bateria ou em um bom ponto de aterramento do motor. Com a ponta de prova (canal 1), espete o fio de sinal do sensor CKP. Geralmente o sensor possui dois fios (sinal e referência negativa), meça nos dois se não souber qual é o de sinal.",
+      "Conecte a garra jacaré preta no negativo da bateria ou em um bom ponto de aterramento do motor. Com a ponta de prova (canal 1), espete o fio de sinal do sensor CKP. Geralmente o sensor possui dois fios (sinal e referência negativa), meça nos dois se não souber qual é o de sinal.\n\n⚠️ IMPORTANTE: Só após realizar todas as conexões físicas do osciloscópio, LIGUE a chave de ignição e dê a partida no motor para realizar o teste.",
     waveformExplanation:
       "O sinal do sensor indutivo reflete a imagem física da roda fônica. É uma Corrente Alternada (CA) cuja amplitude e frequência aumentam com o giro do motor. Anomalias como ondas tortas, picos menores isolados ou assimetria grave indicam roda fônica empenada, dentes quebrados ou excesso de limalha no sensor magnético.",
     waveformPhases: [
@@ -78,7 +78,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "2.5V",
     },
     connectionInstructions:
-      "⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA para alimentar o sensor. Aterre a garra preta do osciloscópio no negativo da bateria. Identifique os fios do sensor (Alimentação 5V/12V, Terra e Sinal). Espete a ponta de prova do canal 1 no fio de Sinal. Você pode confirmar a alimentação espetando no fio positivo (deve ser uma linha reta de 5V ou 12V).",
+      "Aterre a garra preta do osciloscópio no negativo da bateria. Identifique os fios do sensor (Alimentação 5V/12V, Terra e Sinal). Espete a ponta de prova do canal 1 no fio de Sinal. Você pode confirmar a alimentação espetando no fio positivo (deve ser uma linha reta de 5V ou 12V).\n\n⚠️ IMPORTANTE: Só após conectar as garras e espetar as agulhas com segurança, LIGUE a chave de ignição para alimentar o sensor e realizar o teste.",
     waveformExplanation:
       "Diferente do indutivo, o sensor de Efeito Hall processa o sinal internamente e envia uma onda quadrada digital limpa para a ECU. A amplitude não muda com a rotação (sempre 5V ou 12V). Defeitos críticos a observar: base do sinal não chegando a 0V perfeito (falha de aterramento) ou bordas de subida/descida arredondadas (resistência/capacitância excessiva no chicote).",
     waveformPhases: [
@@ -140,7 +140,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "10V",
     },
     connectionInstructions:
-      "⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA e o motor funcionando (ou dando partida). Conecte a garra preta no negativo da bateria. No bico injetor há dois fios: um recebe alimentação constante (12V) e o outro é o pulso negativo controlado pela ECU. Espete a ponta de prova (canal 1) no fio de pulso negativo.",
+      "Conecte a garra preta no negativo da bateria. No bico injetor há dois fios: um recebe alimentação constante (12V) e o outro é o pulso negativo controlado pela ECU. Espete a ponta de prova (canal 1) no fio de pulso negativo.\n\n⚠️ IMPORTANTE: Só após finalizar as conexões das garras e agulhas, LIGUE a chave de ignição e funcione o motor para realizar o teste.",
     waveformExplanation:
       "O sinal do injetor é rico em detalhes eletromecânicos. O pulso de 0V dita o tempo que a válvula fica aberta. O pico indutivo demonstra a saúde elétrica da bobina interna. A corcova (Pintle Bump) na descida do sinal é a assinatura mecânica fundamental: ela comprova fisicamente que a agulha da válvula retornou à sede impulsionada pela mola.",
     waveformPhases: [
@@ -212,7 +212,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "10V",
     },
     connectionInstructions:
-      "⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA e o motor funcionando. Use um atenuador 20:1 ou a pinça capacitiva para evitar queimar seu osciloscópio, pois o pico indutivo pode passar de 400V. Conecte a garra preta no negativo. Espete a ponta de prova (com atenuador) no fio de controle (pulso negativo da ECU) no conector primário da bobina.",
+      "Use um atenuador 20:1 ou a pinça capacitiva para evitar queimar seu osciloscópio, pois o pico indutivo pode passar de 400V. Conecte a garra preta no negativo. Espete a ponta de prova (com atenuador) no fio de controle (pulso negativo da ECU) no conector primário da bobina.\n\n⚠️ IMPORTANTE: Só após todas as conexões estarem devidamente presas, LIGUE a chave de ignição e funcione o motor para realizar o teste.",
     waveformExplanation:
       "A análise do primário da bobina de ignição é a janela principal para a saúde de todo o sistema de ignição (velas, cabos, misturas). O tempo de queima e a tensão sustentada durante a faísca indicam o quão limpa foi a combustão. Falta de oscilações residuais denotam curto-circuito interno na bobina.",
     waveformPhases: [
@@ -284,7 +284,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "1V",
     },
     connectionInstructions:
-      "⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA (motor não precisa estar funcionando). Aterre a garra preta no negativo da bateria. O TPS possui três fios (5V, Terra e Sinal). Espete a ponta de prova no fio de sinal. Gire o acelerador lentamente e observe a rampa de tensão subindo no osciloscópio.",
+      "Aterre a garra preta no negativo da bateria. O TPS possui três fios (5V, Terra e Sinal). Espete a ponta de prova no fio de sinal. Gire o acelerador lentamente e observe a rampa de tensão subindo no osciloscópio.\n\n⚠️ IMPORTANTE: Conecte todas as garras e espete o fio com a chave desligada. Só então LIGUE a chave de ignição (o motor não precisa funcionar) para alimentar o potenciômetro e realizar o teste.",
     waveformExplanation:
       'Ao acelerar devagar, o sinal deve subir formando uma rampa contínua e lisa, saindo de ~0.5V e indo até ~4.5V. Quedas abruptas a zero no meio da rampa indicam trilha do sensor rompida ou gasta (causa "buracos" na aceleração).',
     waveformPhases: [
@@ -333,7 +333,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "400mV",
     },
     connectionInstructions:
-      "⚠️ IMPORTANTE: O motor deve estar FUNCIONANDO e AQUECIDO para a sonda gerar sinal. Conecte a garra preta no negativo da bateria (ou no fio terra do sensor, se preferir isolar o chicote). Identifique o fio de Sinal da sonda lambda (normalmente o fio preto, em sondas de 4 fios, ou o único fio solto nas antigas). Espete a ponta de prova.",
+      "Conecte a garra preta no negativo da bateria (ou no fio terra do sensor, se preferir isolar o chicote). Identifique o fio de Sinal da sonda lambda (normalmente o fio preto, em sondas de 4 fios, ou o único fio solto nas antigas). Espete a ponta de prova.\n\n⚠️ IMPORTANTE: Só após fixar as garras e agulhas, funcione o motor e espere atingir a temperatura de trabalho para que a sonda comece a oscilar e gerar o sinal.",
     waveformExplanation:
       "Com a moto quente e em marcha lenta/aceleração constante, a onda deve ciclar de forma suave e rápida entre 100mV (0.1V) e 800mV-900mV (0.9V). Ondas muito lentas ou travadas indicam sonda contaminada ou defeituosa.",
     waveformPhases: [
@@ -382,7 +382,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "5V",
     },
     connectionInstructions:
-      "⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA e o motor em funcionamento (geralmente fase fria). Aterre a garra preta do osciloscópio no negativo da bateria ou chassi. Identifique os dois fios do aquecedor da Sonda (geralmente de mesma cor, como branco ou preto). Um recebe 12V da bateria/relé, e o outro é aterrado pela ECU em pulsos (PWM). Espete a ponta de prova (Canal 1) neste fio de pulso negativo.",
+      "Aterre a garra preta do osciloscópio no negativo da bateria ou chassi. Identifique os dois fios do aquecedor da Sonda (geralmente de mesma cor, como branco ou preto). Um recebe 12V da bateria/relé, e o outro é aterrado pela ECU em pulsos (PWM). Espete a ponta de prova (Canal 1) neste fio de pulso negativo.\n\n⚠️ IMPORTANTE: Só após fazer as conexões com segurança, LIGUE a chave de ignição e funcione o motor para realizar o teste (preferencialmente em fase fria para analisar a ativação inicial).",
     waveformExplanation:
       "O sinal é uma onda quadrada PWM. A ECU varia o tempo que o sinal fica em 0V (tempo de ativação) para controlar a temperatura do aquecedor. A linha deve subir até a tensão da bateria (~12V a 14V) quando o circuito está aberto (ECU não aterra). Defeitos comuns: fio partido, aquecedor queimado (resistência infinita) ou ECU não chaveando.",
     waveformPhases: [
@@ -431,7 +431,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "2.5V",
     },
     connectionInstructions:
-      "⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA e o motor funcionando para gerar vácuo. Aterre a garra preta no negativo da bateria. O MAP possui três fios (Alimentação 5V, Terra e Sinal). Espete a ponta de prova no fio de Sinal. Observe a variação de tensão ao acelerar subitamente o motor.",
+      "Aterre a garra preta no negativo da bateria. O MAP possui três fios (Alimentação 5V, Terra e Sinal). Espete a ponta de prova no fio de Sinal.\n\n⚠️ IMPORTANTE: Conecte garras e pontas de prova com o veículo desligado. Somente depois disso, LIGUE a chave de ignição e funcione o motor para gerar vácuo e iniciar a leitura. Observe a variação ao acelerar subitamente o motor.",
     waveformExplanation:
       "Em marcha lenta, o sinal fica baixo (alto vácuo, ex: 1.5V). Ao dar uma aceleração rápida (Snap Throttle), a pressão sobe (vácuo cai), e o sinal dá um pico até próximo de 4V. Também é possível ver oscilações correspondentes à sucção dos cilindros em marcha lenta.",
     waveformPhases: [
@@ -491,7 +491,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "1V",
     },
     connectionInstructions:
-      "TESTE NA MOTO: ⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA. Conecte a garra jacaré preta no negativo da bateria ou em um bom ponto de aterramento. Espete o fio de sinal do sensor ABS (geralmente na roda dianteira ou traseira). Meça com a roda girando.\n\nTESTE EM BANCADA (Roda Girando ou Furadeira):\n1. Pode testar o sensor no lugar, levantando a roda e girando-a com a mão para gerar o sinal.\n2. Para testar fora, prenda uma roda fônica ou dente metálico em uma furadeira e gire próximo à ponta do sensor para simular a roda girando.",
+      "TESTE NA MOTO: Conecte a garra jacaré preta no negativo da bateria ou em um bom ponto de aterramento. Espete o fio de sinal do sensor ABS (geralmente na roda dianteira ou traseira). Meça com a roda girando.\n\nTESTE EM BANCADA (Roda Girando ou Furadeira):\n1. Pode testar o sensor no lugar, levantando a roda e girando-a com a mão para gerar o sinal.\n2. Para testar fora, prenda uma roda fônica ou dente metálico em uma furadeira e gire próximo à ponta do sensor para simular a roda girando.\n\n⚠️ IMPORTANTE: Conecte o equipamento com a moto desligada. Para realizar o teste e obter leitura no sistema da moto, LIGUE a chave de ignição após todas as conexões estarem firmes.",
     waveformExplanation:
       "O sinal é uma onda senoidal de Corrente Alternada (CA). Ao contrário do CKP, normalmente a roda fônica do ABS não possui falha de dentes (gap), produzindo uma senoide contínua. Defeitos comuns: sinal muito baixo (distância do sensor aumentada), onda irregular (roda fônica amassada ou suja).",
     waveformPhases: [
@@ -540,7 +540,7 @@ export const componentsDB: ComponentData[] = [
       triggerLevel: "2.5V",
     },
     connectionInstructions:
-      "TESTE NA MOTO: ⚠️ IMPORTANTE: A chave de ignição deve estar LIGADA para o módulo alimentar o sensor. Aterre a garra preta do osciloscópio no negativo da bateria. Identifique os fios do sensor ABS. Espete a ponta de prova do canal 1 no fio de Sinal.\n\nTESTE EM BANCADA (Roda Girando ou Furadeira):\n1. Levante a roda e gire-a com a mão. O módulo ABS deve estar ligado para alimentar o sensor.\n2. Para testar fora, alimente o sensor com a tensão correta (geralmente 12V). Gire uma roda fônica ou ímã multipolar (anexo a uma furadeira) próximo ao sensor para ver a onda quadrada.",
+      "TESTE NA MOTO: Aterre a garra preta do osciloscópio no negativo da bateria. Identifique os fios do sensor ABS. Espete a ponta de prova do canal 1 no fio de Sinal.\n\nTESTE EM BANCADA (Roda Girando ou Furadeira):\n1. Levante a roda e gire-a com a mão.\n2. Para testar fora, alimente o sensor com a tensão correta (geralmente 12V). Gire uma roda fônica ou ímã multipolar (anexo a uma furadeira) próximo ao sensor para ver a onda quadrada.\n\n⚠️ IMPORTANTE: Conecte tudo com a ignição desligada. LIGUE a chave de ignição somente após as conexões estarem prontas para que o módulo alimente o sensor com segurança.",
     waveformExplanation:
       "Gera uma onda quadrada perfeita. O sinal não altera de amplitude com a variação da velocidade, apenas altera a frequência (mais rápido = onda mais espremida). Defeitos: Base da onda não chega em 0V, topos arredondados, falha na amplitude (defeito no sensor ou módulo).",
     waveformPhases: [
