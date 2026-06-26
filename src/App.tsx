@@ -5,6 +5,7 @@ import { LoginForm } from "./components/LoginForm";
 import { Dashboard } from "./components/Dashboard";
 import { AdminPanel } from "./components/AdminPanel";
 import { ComponentDetail } from "./components/ComponentDetail";
+import { InstallPrompt } from "./components/InstallPrompt";
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -50,33 +51,42 @@ export default function App() {
     setView("detail");
   };
 
-  if (view === "login") {
-    return <LoginForm onSuccess={handleLogin} />;
-  }
+  const renderView = () => {
+    if (view === "login") {
+      return <LoginForm onSuccess={handleLogin} />;
+    }
 
-  if (view === "admin" && user) {
-    return <AdminPanel adminUser={user} onBack={() => setView("dashboard")} onUserUpdate={(updatedUser) => setUser(updatedUser)} />;
-  }
+    if (view === "admin" && user) {
+      return <AdminPanel adminUser={user} onBack={() => setView("dashboard")} onUserUpdate={(updatedUser) => setUser(updatedUser)} />;
+    }
 
-  if (view === "detail" && selectedComponent) {
-    return (
-      <ComponentDetail
-        component={selectedComponent}
-        onBack={() => setView("dashboard")}
-      />
-    );
-  }
+    if (view === "detail" && selectedComponent) {
+      return (
+        <ComponentDetail
+          component={selectedComponent}
+          onBack={() => setView("dashboard")}
+        />
+      );
+    }
 
-  if (view === "dashboard" && user) {
-    return (
-      <Dashboard
-        user={user}
-        onSelectComponent={navigateToComponent}
-        onAdminClick={() => setView("admin")}
-        onLogout={handleLogout}
-      />
-    );
-  }
+    if (view === "dashboard" && user) {
+      return (
+        <Dashboard
+          user={user}
+          onSelectComponent={navigateToComponent}
+          onAdminClick={() => setView("admin")}
+          onLogout={handleLogout}
+        />
+      );
+    }
 
-  return null;
+    return null;
+  };
+
+  return (
+    <>
+      {renderView()}
+      <InstallPrompt />
+    </>
+  );
 }
