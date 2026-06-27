@@ -14,19 +14,29 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const user = login(username, password);
-    if (user) {
-      if (rememberMe) {
-        localStorage.setItem("motostore_remembered_user", JSON.stringify(user));
+    setError(false);
+    setIsLoggingIn(true);
+    try {
+      const user = await login(username, password);
+      if (user) {
+        if (rememberMe) {
+          localStorage.setItem("motostore_remembered_user", JSON.stringify(user));
+        } else {
+          localStorage.removeItem("motostore_remembered_user");
+        }
+        onSuccess(user);
       } else {
-        localStorage.removeItem("motostore_remembered_user");
+        setError(true);
       }
-      onSuccess(user);
-    } else {
+    } catch (err) {
+      console.error(err);
       setError(true);
+    } finally {
+      setIsLoggingIn(false);
     }
   };
 
@@ -108,9 +118,10 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
 
           <button
             type="submit"
-            className="w-full bg-cyan-600 hover:bg-cyan-700 text-white text-lg font-semibold py-4 px-4 rounded-xl transition-colors mt-6 shadow-md shadow-cyan-600/20"
+            disabled={isLoggingIn}
+            className="w-full bg-cyan-600 hover:bg-cyan-700 disabled:bg-cyan-400 text-white text-lg font-semibold py-4 px-4 rounded-xl transition-colors mt-6 shadow-md shadow-cyan-600/20 flex items-center justify-center gap-2"
           >
-            Acessar Sistema
+            {isLoggingIn ? "Acessando..." : "Acessar Sistema"}
           </button>
         </form>
       </motion.div>

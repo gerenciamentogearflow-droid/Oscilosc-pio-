@@ -16,8 +16,11 @@ export default function App() {
     useState<ComponentData | null>(null);
 
   useEffect(() => {
-    // Inicializa o localStorage com o usuário master caso não exista
-    initAuth();
+    // Inicializa o banco com o usuário master caso não exista no Firestore
+    const runInit = async () => {
+      await initAuth();
+    };
+    runInit();
 
     // Verifica se há um acesso lembrado
     const remembered = localStorage.getItem("motostore_remembered_user");

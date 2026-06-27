@@ -36,15 +36,20 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
 
   useEffect(() => {
     if (adminUser.role === "admin") {
-      setUsers(getAllUsers(adminUser));
+      const fetchUsers = async () => {
+        const uList = await getAllUsers(adminUser);
+        setUsers(uList);
+      };
+      fetchUsers();
     }
   }, [adminUser]);
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newUsername || !newPassword) return;
 
-    const success = registerUser(adminUser, newUsername, newPassword);
+    setStatusMsg({ text: "Cadastrando...", type: "info" });
+    const success = await registerUser(adminUser, newUsername, newPassword);
     if (success) {
       setStatusMsg({
         text: "Usuário cadastrado com sucesso!",
@@ -52,7 +57,8 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
       });
       setNewUsername("");
       setNewPassword("");
-      setUsers(getAllUsers(adminUser));
+      const uList = await getAllUsers(adminUser);
+      setUsers(uList);
     } else {
       setStatusMsg({
         text: "Erro: Usuário já existe ou permissão negada.",
@@ -63,11 +69,12 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
     setTimeout(() => setStatusMsg({ text: "", type: "" }), 4000);
   };
 
-  const handleProfileUpdate = (e: React.FormEvent) => {
+  const handleProfileUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editUsername) return;
 
-    const updated = updateUserCredentials(adminUser, editUsername, editPassword);
+    setProfileMsg({ text: "Atualizando...", type: "info" });
+    const updated = await updateUserCredentials(adminUser, editUsername, editPassword);
     if (updated) {
       setProfileMsg({
         text: "Dados atualizados com sucesso!",
@@ -76,7 +83,8 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
       setEditPassword("");
       onUserUpdate(updated);
       if (adminUser.role === "admin") {
-         setUsers(getAllUsers(updated));
+         const uList = await getAllUsers(updated);
+         setUsers(uList);
       }
     } else {
       setProfileMsg({
@@ -96,11 +104,12 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
     setEditUserMsg({ text: "", type: "" });
   };
 
-  const handleEditUserSubmit = (e: React.FormEvent) => {
+  const handleEditUserSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingUser) return;
 
-    const success = adminUpdateUser(
+    setEditUserMsg({ text: "Salvando...", type: "info" });
+    const success = await adminUpdateUser(
       adminUser,
       editingUser.username,
       editUserUsername,
@@ -110,7 +119,8 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
 
     if (success) {
       setEditUserMsg({ text: "Usuário atualizado com sucesso!", type: "success" });
-      setUsers(getAllUsers(adminUser));
+      const uList = await getAllUsers(adminUser);
+      setUsers(uList);
       setTimeout(() => {
         setEditingUser(null);
       }, 1500);
@@ -123,11 +133,12 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
     setUserToDelete(username);
   };
 
-  const executeDeleteUser = () => {
+  const executeDeleteUser = async () => {
     if (!userToDelete) return;
-    const success = deleteUser(adminUser, userToDelete);
+    const success = await deleteUser(adminUser, userToDelete);
     if (success) {
-      setUsers(getAllUsers(adminUser));
+      const uList = await getAllUsers(adminUser);
+      setUsers(uList);
       setUserToDelete(null);
     }
   };
