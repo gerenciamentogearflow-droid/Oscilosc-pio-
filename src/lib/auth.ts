@@ -50,31 +50,42 @@ export const login = async (username: string, password: string): Promise<User | 
 
   // 1. Tenta autenticação via Firestore
   try {
+    let firestoreUser: any = null;
+
     // Tenta obter o documento exatamente como digitado
     let userDocRef = doc(db, "users", cleanUsername);
     let userDoc = await getDoc(userDocRef);
     
-    // Se não encontrou e o usuário digitou "mafran" minúsculo, tenta buscar "Mafran"
-    if (!userDoc.exists() && cleanUsername.toLowerCase() === "mafran") {
-      userDocRef = doc(db, "users", "Mafran");
-      userDoc = await getDoc(userDocRef);
+    if (userDoc.exists()) {
+      firestoreUser = userDoc.data();
+    } else {
+      // Fallback: Busca todos os usuários do Firestore para tentar match case-insensitive
+      const usersCol = collection(db, "users");
+      const snapshot = await getDocs(usersCol);
+      const match = snapshot.docs.find(d => {
+        const data = d.data();
+        return data.username && data.username.trim().toLowerCase() === cleanUsername.toLowerCase();
+      });
+      if (match) {
+        firestoreUser = match.data();
+      }
     }
 
-    if (userDoc.exists()) {
-      const data = userDoc.data();
-      if (data.password && data.password.trim() === cleanPassword) {
+    if (firestoreUser) {
+      if (firestoreUser.password && firestoreUser.password.trim() === cleanPassword) {
         // Sincroniza esse usuário para o localStorage para futuras consultas offline/resilientes
         const localUsers = getLocalUsers();
-        const existingIdx = localUsers.findIndex((u: any) => u.username.toLowerCase() === cleanUsername.toLowerCase());
-        const finalUsername = data.username || cleanUsername;
+        const finalUsername = firestoreUser.username || cleanUsername;
+        const existingIdx = localUsers.findIndex((u: any) => u.username.trim().toLowerCase() === finalUsername.trim().toLowerCase());
+        
         if (existingIdx >= 0) {
-          localUsers[existingIdx] = { username: finalUsername, password: data.password, role: data.role };
+          localUsers[existingIdx] = { username: finalUsername, password: firestoreUser.password, role: firestoreUser.role };
         } else {
-          localUsers.push({ username: finalUsername, password: data.password, role: data.role });
+          localUsers.push({ username: finalUsername, password: firestoreUser.password, role: firestoreUser.role });
         }
         saveLocalUsers(localUsers);
 
-        return { username: finalUsername, role: data.role };
+        return { username: finalUsername, role: firestoreUser.role };
       }
     }
   } catch (error) {
@@ -121,25 +132,29 @@ export const registerUser = async (
 ): Promise<boolean> => {
   if (adminUser.role !== "admin") return false;
 
+  const cleanUser = newUsername ? newUsername.trim() : "";
+  const cleanPass = newPassword ? newPassword.trim() : "";
+  if (!cleanUser || !cleanPass) return false;
+
   // Atualiza local primeiro para feedback instantâneo e robustez offline
   const localUsers = getLocalUsers();
-  if (localUsers.some((u: any) => u.username === newUsername)) {
+  if (localUsers.some((u: any) => u.username && u.username.trim().toLowerCase() === cleanUser.toLowerCase())) {
     return false;
   }
 
   localUsers.push({
-    username: newUsername,
-    password: newPassword,
+    username: cleanUser,
+    password: cleanPass,
     role: "mechanic"
   });
   saveLocalUsers(localUsers);
 
   // Tenta salvar no Firestore
   try {
-    const userDocRef = doc(db, "users", newUsername);
+    const userDocRef = doc(db, "users", cleanUser);
     await setDoc(userDocRef, {
-      username: newUsername,
-      password: newPassword,
+      username: cleanUser,
+      password: cleanPass,
       role: "mechanic",
     });
   } catch (error) {

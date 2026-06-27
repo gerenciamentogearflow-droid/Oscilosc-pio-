@@ -169,13 +169,13 @@ export function RealSignalsList({
       <div className="flex items-center gap-3 mb-6">
         <button
           onClick={onBack}
-          className="p-2 rounded-full hover:bg-zinc-100 text-zinc-500"
+          className="p-2 rounded-full hover:bg-zinc-800 text-zinc-400"
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div>
-          <h2 className="text-lg font-bold text-zinc-900">{component.name}</h2>
-          <p className="text-xs text-cyan-600">Sinais Reais da Comunidade</p>
+          <h2 className="text-lg font-bold text-white">{component.name}</h2>
+          <p className="text-xs text-cyan-500">Sinais Reais da Comunidade</p>
         </div>
       </div>
 
@@ -191,9 +191,9 @@ export function RealSignalsList({
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white border border-zinc-200 rounded-2xl p-5 mb-6 shadow-sm"
+          className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 mb-6 shadow-sm"
         >
-          <h3 className="font-semibold text-base mb-4 text-zinc-800">
+          <h3 className="font-semibold text-base mb-4 text-white">
             Enviar Novo Sinal
           </h3>
 
@@ -203,7 +203,7 @@ export function RealSignalsList({
             value={motorcycleName}
             onChange={(e) => setMotorcycleName(e.target.value)}
             disabled={uploading}
-            className="w-full bg-white border border-zinc-300 rounded-xl px-4 py-4 text-base text-zinc-900 placeholder:text-zinc-400 mb-5 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 shadow-sm"
+            className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-4 text-base text-zinc-100 placeholder:text-zinc-600 mb-5 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 shadow-sm"
           />
 
           <input
@@ -229,20 +229,20 @@ export function RealSignalsList({
               <div className="flex gap-3">
                 <button
                   onClick={openCamera}
-                  className="flex-1 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 py-4 rounded-xl text-base font-semibold flex items-center justify-center gap-2 transition-colors border border-zinc-200"
+                  className="flex-1 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 py-4 rounded-xl text-base font-semibold flex items-center justify-center gap-2 transition-colors border border-zinc-700"
                 >
                   <Camera className="w-5 h-5" /> Câmera
                 </button>
                 <button
                   onClick={openGallery}
-                  className="flex-1 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 py-4 rounded-xl text-base font-semibold flex items-center justify-center gap-2 transition-colors border border-zinc-200"
+                  className="flex-1 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 py-4 rounded-xl text-base font-semibold flex items-center justify-center gap-2 transition-colors border border-zinc-700"
                 >
                   <ImageIcon className="w-5 h-5" /> Galeria
                 </button>
               </div>
               <button
                 onClick={() => setShowUploadForm(false)}
-                className="w-full py-3 bg-white hover:bg-red-50 text-zinc-500 hover:text-red-600 rounded-xl text-base font-medium transition-colors border border-zinc-200"
+                className="w-full py-3 bg-zinc-900 hover:bg-red-500/10 text-zinc-500 hover:text-red-400 rounded-xl text-base font-medium transition-colors border border-zinc-800"
               >
                 Cancelar
               </button>
@@ -263,7 +263,7 @@ export function RealSignalsList({
                 key={signal.id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="bg-white border border-zinc-200 rounded-2xl overflow-hidden shadow-sm"
+                className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-sm"
               >
                 <div className="w-full aspect-video bg-black relative">
                   <img
@@ -273,12 +273,12 @@ export function RealSignalsList({
                   />
                 </div>
                 <div className="p-5">
-                  <h4 className="font-bold text-lg text-zinc-900">
+                  <h4 className="font-bold text-lg text-white">
                     {signal.motorcycleName}
                   </h4>
-                  <p className="text-sm text-zinc-500 mt-2 flex items-center gap-1">
+                  <p className="text-sm text-zinc-400 mt-2 flex items-center gap-1">
                     Enviado por:{" "}
-                    <span className="text-cyan-600 font-medium">
+                    <span className="text-cyan-500 font-medium">
                       {signal.userName}
                     </span>
                   </p>
@@ -294,9 +294,9 @@ export function RealSignalsList({
             ))}
           </div>
         ) : (
-          <div className="text-center py-16 bg-zinc-50 rounded-2xl border-2 border-zinc-200 border-dashed">
-            <Camera className="w-10 h-10 text-zinc-400 mx-auto mb-4" />
-            <p className="text-zinc-700 font-medium text-lg">
+          <div className="text-center py-16 bg-zinc-900/50 rounded-2xl border-2 border-zinc-800 border-dashed">
+            <Camera className="w-10 h-10 text-zinc-600 mx-auto mb-4" />
+            <p className="text-zinc-300 font-medium text-lg">
               Nenhum sinal registrado.
             </p>
             <p className="text-zinc-500 text-sm mt-2">

@@ -144,18 +144,18 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-900 flex flex-col">
-      <header className="px-4 pt-12 pb-4 bg-white border-b border-zinc-200 z-10 shadow-sm">
+    <div className="min-h-screen bg-zinc-950 text-white flex flex-col">
+      <header className="px-4 pt-12 pb-4 bg-zinc-900 border-b border-zinc-800 z-10 shadow-sm">
         <div className="flex items-center gap-3">
           <button
             onClick={onBack}
-            className="p-2 -ml-2 rounded-full hover:bg-zinc-100 text-zinc-500 transition-colors"
+            className="p-2 -ml-2 rounded-full hover:bg-zinc-800 text-zinc-400 transition-colors"
           >
             <ArrowLeft className="w-6 h-6" />
           </button>
           <div>
             <h1 className="text-xl font-bold tracking-tight">Configurações</h1>
-            <p className="text-xs text-zinc-500">Perfil e conta</p>
+            <p className="text-xs text-zinc-400">Perfil e conta</p>
           </div>
         </div>
       </header>
@@ -166,30 +166,30 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm"
+          className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 shadow-sm"
         >
           <div className="flex items-center gap-2 mb-4 text-cyan-600">
             <Settings className="w-5 h-5" />
-            <h2 className="font-semibold text-zinc-900">
+            <h2 className="font-semibold text-white">
               Minha Conta
             </h2>
           </div>
 
           <form onSubmit={handleProfileUpdate} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-zinc-500 mb-1">
+              <label className="block text-xs font-medium text-zinc-400 mb-1">
                 Nome de Login
               </label>
               <input
                 type="text"
                 value={editUsername}
                 onChange={(e) => setEditUsername(e.target.value)}
-                className="w-full bg-white border border-zinc-300 rounded-lg px-3 py-2 text-zinc-900 focus:outline-none focus:border-cyan-500 shadow-sm"
+                className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-cyan-500 shadow-sm"
                 required
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-zinc-500 mb-1">
+              <label className="block text-xs font-medium text-zinc-400 mb-1">
                 Nova Senha
               </label>
               <input
@@ -197,7 +197,7 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
                 value={editPassword}
                 onChange={(e) => setEditPassword(e.target.value)}
                 placeholder="Deixe em branco para manter a atual"
-                className="w-full bg-white border border-zinc-300 rounded-lg px-3 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-cyan-500 shadow-sm"
+                className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-white placeholder:text-zinc-400 focus:outline-none focus:border-cyan-500 shadow-sm"
               />
             </div>
 
@@ -225,37 +225,37 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm"
+              className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 shadow-sm"
             >
               <div className="flex items-center gap-2 mb-4 text-emerald-600">
                 <UserPlus className="w-5 h-5" />
-                <h2 className="font-semibold text-zinc-900">
+                <h2 className="font-semibold text-white">
                   Cadastrar Novo Mecânico
                 </h2>
               </div>
 
               <form onSubmit={handleRegister} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-medium text-zinc-500 mb-1">
+                  <label className="block text-xs font-medium text-zinc-400 mb-1">
                     Nome de Usuário
                   </label>
                   <input
                     type="text"
                     value={newUsername}
                     onChange={(e) => setNewUsername(e.target.value)}
-                    className="w-full bg-white border border-zinc-300 rounded-lg px-3 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-500 shadow-sm"
+                    className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-white placeholder:text-zinc-400 focus:outline-none focus:border-emerald-500 shadow-sm"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-zinc-500 mb-1">
+                  <label className="block text-xs font-medium text-zinc-400 mb-1">
                     Senha
                   </label>
                   <input
                     type="password"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full bg-white border border-zinc-300 rounded-lg px-3 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-500 shadow-sm"
+                    className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-white placeholder:text-zinc-400 focus:outline-none focus:border-emerald-500 shadow-sm"
                     required
                   />
                 </div>
@@ -281,21 +281,21 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-white border border-zinc-200 rounded-xl p-5 shadow-sm"
+              className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 shadow-sm"
             >
               <div className="flex items-center gap-2 mb-4 text-blue-600">
                 <Users className="w-5 h-5" />
-                <h2 className="font-semibold text-zinc-900">Usuários Cadastrados</h2>
+                <h2 className="font-semibold text-white">Usuários Cadastrados</h2>
               </div>
 
               <div className="space-y-2">
                 {users.map((u, i) => (
                   <div
                     key={i}
-                    className="flex justify-between items-center p-3 bg-zinc-50 rounded-lg border border-zinc-200"
+                    className="flex justify-between items-center p-3 bg-zinc-950 rounded-lg border border-zinc-800"
                   >
                     <div className="flex flex-col">
-                      <span className="font-semibold text-zinc-900 text-base">{u.username}</span>
+                      <span className="font-semibold text-white text-base">{u.username}</span>
                       <span
                         className={`text-[10px] w-max px-2 py-0.5 mt-1 rounded-full font-bold ${
                           u.role === "admin" ? "bg-blue-100 text-blue-700" : "bg-emerald-100 text-emerald-700"
@@ -308,7 +308,7 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => startEditUser(u)}
-                        className="p-2 text-zinc-500 hover:text-cyan-600 hover:bg-cyan-50 rounded-lg transition-colors"
+                        className="p-2 text-zinc-400 hover:text-cyan-600 hover:bg-cyan-50 rounded-lg transition-colors"
                         title="Editar usuário"
                       >
                         <Pencil className="w-4 h-4" />
@@ -340,11 +340,11 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="w-full max-w-md bg-white border border-zinc-200 rounded-2xl p-6 shadow-2xl relative"
+              className="w-full max-w-md bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl relative"
             >
               <button
                 onClick={() => setEditingUser(null)}
-                className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-zinc-100 text-zinc-400 hover:text-zinc-600 transition-colors"
+                className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-zinc-800 text-zinc-400 hover:text-zinc-300 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -362,7 +362,7 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
                     type="text"
                     value={editUserUsername}
                     onChange={(e) => setEditUserUsername(e.target.value)}
-                    className="w-full bg-white border border-zinc-300 rounded-lg px-3 py-2 text-zinc-900 focus:outline-none focus:border-cyan-500 shadow-sm text-sm"
+                    className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-cyan-500 shadow-sm text-sm"
                     required
                   />
                 </div>
@@ -377,12 +377,12 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
                       value={editUserPassword}
                       onChange={(e) => setEditUserPassword(e.target.value)}
                       placeholder="Deixe em branco para manter a atual"
-                      className="w-full bg-white border border-zinc-300 rounded-lg pl-3 pr-10 py-2 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-cyan-500 shadow-sm text-sm"
+                      className="w-full bg-zinc-900 border border-zinc-700 rounded-lg pl-3 pr-10 py-2 text-white placeholder:text-zinc-400 focus:outline-none focus:border-cyan-500 shadow-sm text-sm"
                     />
                     <button
                       type="button"
                       onClick={() => setEditUserShowPassword(!editUserShowPassword)}
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-zinc-400 hover:text-zinc-600 focus:outline-none"
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-zinc-400 hover:text-zinc-300 focus:outline-none"
                     >
                       {editUserShowPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -397,7 +397,7 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
                     <select
                       value={editUserRole}
                       onChange={(e: any) => setEditUserRole(e.target.value)}
-                      className="w-full bg-white border border-zinc-300 rounded-lg px-3 py-2 text-zinc-900 focus:outline-none focus:border-cyan-500 shadow-sm text-sm"
+                      className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-cyan-500 shadow-sm text-sm"
                     >
                       <option value="mechanic">Mecânico</option>
                       <option value="admin">Administrador</option>
@@ -417,7 +417,7 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
                   <button
                     type="button"
                     onClick={() => setEditingUser(null)}
-                    className="px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 rounded-lg transition-colors border border-zinc-200"
+                    className="px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-800 rounded-lg transition-colors border border-zinc-800"
                   >
                     Cancelar
                   </button>
@@ -442,14 +442,14 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="w-full max-w-sm bg-white border border-zinc-200 rounded-2xl p-6 shadow-2xl relative"
+              className="w-full max-w-sm bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl relative"
             >
               <div className="flex flex-col items-center text-center">
                 <div className="bg-red-50 p-3 rounded-full border border-red-100 mb-4 text-red-600">
                   <AlertTriangle className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg font-bold text-zinc-950 mb-1">Excluir Usuário?</h3>
-                <p className="text-sm text-zinc-500 mb-6">
+                <p className="text-sm text-zinc-400 mb-6">
                   Tem certeza que deseja excluir o usuário <span className="font-semibold text-zinc-800">"{userToDelete}"</span>? Esta ação não pode ser desfeita.
                 </p>
 
@@ -457,7 +457,7 @@ export function AdminPanel({ adminUser, onBack, onUserUpdate }: AdminPanelProps)
                   <button
                     type="button"
                     onClick={() => setUserToDelete(null)}
-                    className="flex-1 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 rounded-lg transition-colors border border-zinc-200"
+                    className="flex-1 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-800 rounded-lg transition-colors border border-zinc-800"
                   >
                     Não, cancelar
                   </button>

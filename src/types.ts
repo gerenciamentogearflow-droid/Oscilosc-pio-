@@ -27,6 +27,17 @@ export interface ComponentData {
   waveformExplanation: string;
   waveformPhases?: WaveformPhase[];
   waveType: string;
+  hidden?: boolean;
+  multimeter?: {
+    setting: string;
+    instructions: string;
+    expectedValues: string;
+    variesByModel: boolean;
+    minValue?: number;
+    maxValue?: number;
+    unit?: string;
+    temperatureObservation?: string;
+  };
 }
 
 export interface User {

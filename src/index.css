@@ -7,5 +7,5 @@
 }
 
 body {
-  @apply bg-zinc-50 text-zinc-900 antialiased selection:bg-emerald-500/30;
+  @apply bg-zinc-950 text-zinc-100 antialiased selection:bg-cyan-500/30;
 }

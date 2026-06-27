@@ -40,10 +40,42 @@ export function OscilloscopeDisplay({ component }: OscilloscopeDisplayProps) {
       case "pwm":
         // PWM for Heater: 12V (20) -> 0V (80)
         return "M 0 20 L 10 20 L 10 80 L 35 80 L 35 20 L 60 20 L 60 80 L 85 80 L 85 20 L 100 20";
+      case "dc-ripple":
+        // Voltage Rectifier: DC voltage (~14V) with slight ripple
+        return "M 0 30 Q 5 27 10 30 T 20 30 T 30 30 T 40 30 T 50 30 T 60 30 T 70 30 T 80 30 T 90 30 T 100 30";
       default:
         return "M 0 50 L 100 50";
     }
   };
+
+  const generateSinePath = (amplitude: number, period: number, phaseShift: number) => {
+    let path = `M 0 ${50 + Math.sin(phaseShift) * amplitude}`;
+    for (let x = 1; x <= 105; x++) {
+      const y = 50 + Math.sin((x * 2 * Math.PI) / period + phaseShift) * amplitude;
+      path += ` L ${x} ${y}`;
+    }
+    return path;
+  };
+
+  const getWaves = () => {
+    if (component.id === "estator-2f") {
+      return [
+        { id: "p1", path: generateSinePath(-30, 16, 0), color: "#00FFFF" },
+        { id: "p2", path: generateSinePath(-30, 16, Math.PI), color: "#FF00FF" }, // 180 deg out of phase
+      ];
+    }
+    if (component.id === "estator-3f") {
+      return [
+        { id: "p1", path: generateSinePath(-30, 16, 0), color: "#00FFFF" },
+        { id: "p2", path: generateSinePath(-30, 16, (2 * Math.PI) / 3), color: "#FF00FF" }, // 120 deg out of phase
+        { id: "p3", path: generateSinePath(-30, 16, (4 * Math.PI) / 3), color: "#FFFF00" }, // 240 deg out of phase
+      ];
+    }
+    
+    return [{ id: "main", path: getPath(), color: "#00FFFF" }];
+  };
+
+  const waves = getWaves();
 
   return (
     <div className="bg-gradient-to-br from-[#77aed4] to-[#4A85B3] p-3 sm:p-5 rounded-2xl shadow-2xl mx-auto w-full max-w-4xl flex flex-col sm:flex-row gap-3 sm:gap-5 border-2 border-[#85BDE8]">
@@ -98,15 +130,21 @@ export function OscilloscopeDisplay({ component }: OscilloscopeDisplayProps) {
             preserveAspectRatio="none"
             viewBox="0 0 100 100"
           >
-            <path
-              d={getPath()}
-              fill="none"
-              stroke="#00FFFF"
-              strokeWidth="1.5"
-              vectorEffect="non-scaling-stroke"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-            />
+            {waves.map((wave) => (
+              <path
+                key={wave.id}
+                d={wave.path}
+                fill="none"
+                stroke={wave.color}
+                strokeWidth="1.5"
+                vectorEffect="non-scaling-stroke"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                style={{
+                  filter: `drop-shadow(0px 0px 3px ${wave.color})`
+                }}
+              />
+            ))}
             {component.waveformPhases?.map((phase) =>
               phase.x !== undefined && phase.y !== undefined ? (
                 <g key={phase.id}>
